@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PHILYBOTICS™ Engineering Hub</title>
+
+<style>
+
+/* ================= GLOBAL RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: #f9fafb; /* Light theme background */
+  overflow: hidden;
+}
+
+/* ================= GLASS HEADER ================= */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 65px;
+  backdrop-filter: blur(15px);
+  background: rgba(255, 255, 255, 0.3); /* Light glass */
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-buttons button {
+  padding: 10px 22px;
+  border-radius: 30px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: rgba(255,255,255,0.15); /* Default light background */
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease, box-shadow 0.2s ease, text-shadow 0.2s ease, color 0.2s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1); /* 3D effect */
+}
+
+.nav-buttons button:hover {
+  background: rgba(255,255,255,0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+}
+
+/* ================= ACTIVE BUTTON ================= */
+.nav-buttons button.active {
+  background: rgba(255,255,255,0.25); /* Keep light/frosted background */
+  color: #00ff00; /* Green text */
+  text-shadow: 0 0 8px rgba(0,255,0,0.5); /* Faint green glow around text */
+  box-shadow: 0 3px 10px rgba(0,255,0,0.2); /* Subtle green shadow for 3D effect */
+  transform: translateY(-1px);
+}
+
+/* ================= CONTENT AREA ================= */
+.content {
+  position: absolute;
+  top: 65px;
+  left: 0;
+  width: 100%;
+  height: calc(100dvh - 65px);
+  overflow: hidden;
+}
+
+/* ================= WIDGET SECTIONS ================= */
+.widget {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.widget.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ================= E.E.E (WOKWI FIXED) ================= */
+.eee-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.simulator-container {
+  flex: 1;
+  width: 100%;
+}
+
+.simulator-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.eee-wrapper footer {
+  height: 42px;
+  background: rgba(255,255,255,0.95);
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.eee-wrapper footer a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #111;
+}
+
+/* ================= L.A.B (CHEMREAX) ================= */
+.app-container {
+  height: 100%;
+  width: 100%;
+}
+
+.app-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* ================= C.A.D (EXCALIDRAW) ================= */
+.cad-container {
+  width: 100%;
+  height: 100%;
+}
+
+.cad-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<div class="header">
+  <div class="nav-buttons">
+    <button onclick="showWidget('eee')" id="btn-eee" class="active">E.E.E</button>
+    <button onclick="showWidget('cad')" id="btn-cad">C.A.D</button>
+    <button onclick="showWidget('lab')" id="btn-lab">L.A.B</button>
+  </div>
+</div>
+
+<!-- ================= CONTENT ================= -->
+<div class="content">
+
+  <!-- E.E.E (Wokwi) -->
+  <div class="widget active" id="eee">
+    <div class="eee-wrapper">
+      <div class="simulator-container">
+        <iframe
+          src="https://wokwi.com/projects/455227871735964673/embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer">
+        </iframe>
+      </div>
+      <footer>
+        <a href="https://taplink.cc/philybotics" target="_blank">
+          𝚠𝚠𝚠.𝚙𝚑𝚒𝚕𝚢𝚋𝚘𝚝𝚒𝚌𝚜.𝚌𝚝.𝚠𝚜
+        </a>
+      </footer>
+    </div>
+  </div>
+
+  <!-- C.A.D (Excalidraw) -->
+  <div class="widget" id="cad">
+    <div class="cad-container">
+      <iframe 
+        src="https://excalidraw.com/#room=661375dcd2de385f9a14,6LvoafQ6dQl435Mr9tQojA"
+        allow="clipboard-write; clipboard-read; fullscreen">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- L.A.B (ChemReaX) -->
+  <div class="widget" id="lab">
+    <div class="app-container">
+      <iframe 
+        src="https://www.sciencebysimulation.com/chemreax/Analyzer.aspx"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showWidget(id) {
+  document.querySelectorAll('.widget').forEach(w => w.classList.remove('active'));
+  document.querySelectorAll('.nav-buttons button').forEach(b => b.classList.remove('active'));
+
+  document.getElementById(id).classList.add('active');
+  document.getElementById('btn-' + id).classList.add('active');
+}
+</script>
+
+</body>
+</html>
